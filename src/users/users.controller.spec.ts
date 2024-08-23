@@ -9,6 +9,7 @@ describe('UsersController', () => {
   let fakeUsersService: Partial<UsersService>;
   let fakeAuthService: Partial<AuthService>;
 
+  // Before each test we create fake service implementations 
   beforeEach(async () => {
     fakeUsersService = {
       findOne: (id: number) => {
@@ -31,6 +32,7 @@ describe('UsersController', () => {
       },
     };
 
+    // We add fake services to imitate standart behavior
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [
@@ -45,6 +47,7 @@ describe('UsersController', () => {
       ],
     }).compile();
 
+    // Create a controller
     controller = module.get<UsersController>(UsersController);
   });
 

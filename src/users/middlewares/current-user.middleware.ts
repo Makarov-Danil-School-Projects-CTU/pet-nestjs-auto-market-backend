@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { UsersService } from '../users.service';
 import { User } from '../user.entity';
 
+// Rewrite a basic Request type from Express to add a currentUser field
 declare global {
   namespace Express {
     interface Request {
@@ -11,6 +12,7 @@ declare global {
   }
 }
 
+// Implementation of a global Nest middleware
 @Injectable()
 export class CurrentUserMiddleware implements NestMiddleware {
   constructor(private usersService: UsersService) {}

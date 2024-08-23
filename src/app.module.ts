@@ -6,12 +6,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
-import { User } from './users/user.entity';
-import { Report } from './reports/report.entity';
 const cookieSession = require('cookie-session');
 
 @Module({
   imports: [
+    // Configure ConfigModule for using .env variables based on dependency injection
+    // That strange method is recomended by NestJs documentation
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
@@ -21,6 +21,9 @@ const cookieSession = require('cookie-session');
     ReportsModule,
   ],
   controllers: [AppController],
+  
+  // Create a global validation pipe
+  // Whitelist means that we ignore input properties in a body except needed
   providers: [
     AppService,
     {
@@ -33,7 +36,8 @@ const cookieSession = require('cookie-session');
 })
 export class AppModule {
   constructor(private configService: ConfigService) {}
-
+  
+  // Apply cookie library for all routes
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(

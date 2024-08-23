@@ -13,6 +13,7 @@ import { CurrentUserMiddleware } from './middlewares/current-user.middleware';
 })
 export class UsersModule {
   configure(consumer: MiddlewareConsumer) {
+    // Connect a global middleware
     consumer.apply(CurrentUserMiddleware).forRoutes('*');
   }
 }

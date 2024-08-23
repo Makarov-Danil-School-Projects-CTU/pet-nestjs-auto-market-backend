@@ -22,6 +22,7 @@ import { User } from './user.entity';
 import { AuthGuard } from '../guards/auth.guard';
 
 @Controller('auth')
+// Serialize every output entity
 @Serialize(UserDto)
 export class UsersController {
   constructor(

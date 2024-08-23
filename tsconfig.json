@@ -11,6 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
+    // Run migrations and entities in a builded project (./dist)
     "allowJs": true
   }
 }

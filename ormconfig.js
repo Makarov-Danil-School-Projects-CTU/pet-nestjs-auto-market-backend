@@ -1,3 +1,4 @@
+// Base config 
 var dbConfig = {
   synchronize: false,
   migrations: ['migrations/*.js'],
@@ -6,8 +7,10 @@ var dbConfig = {
   },
 };
 
+// Adding properties for each case
 switch (process.env.NODE_ENV) {
   case 'development':
+    // SQLite configuration
     Object.assign(dbConfig, {
       type: 'sqlite',
       database: 'db.sqlite',
@@ -15,15 +18,18 @@ switch (process.env.NODE_ENV) {
     });
     break;
   case 'test':
+    // SQLite configuration
     Object.assign(dbConfig, {
       type: 'sqlite',
       database: 'test.sqlite',
       entities: ['**/*.entity.ts'],
+
       // all of our migrations run before each test
       migrationsRun: true
     });
     break;
   case 'production':
+    // Postgres configuration
     Object.assign(dbConfig, {
       type: 'postgres',
       url: process.env.DATABASE_URL,
